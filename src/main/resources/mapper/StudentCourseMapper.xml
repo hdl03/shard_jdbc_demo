@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.jdbc.mapper.StudentCourseMapper">
+  <resultMap id="BaseResultMap" type="com.share.jdbc.entity.StudentCourse">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="scId" jdbcType="BIGINT" property="scId" />
+    <result column="cId" jdbcType="BIGINT" property="cId" />
+    <result column="sId" jdbcType="BIGINT" property="sId" />
+    <result column="score" jdbcType="DOUBLE" property="score" />
+    <result column="examDate" jdbcType="TIMESTAMP" property="examDate" />
+  </resultMap>
+</mapper>

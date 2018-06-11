@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+
+        <property name="javaFileEncoding" value="UTF-8"/>
+
+
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+            <!-- caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true -->
+            <property name="caseSensitive" value="true"/>
+        </plugin>
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+             <property name="suppressDate" value="true"></property>
+             <property name="javaFileEncoding" value="utf-8"/>
+        </commentGenerator>
+
+ 
+
+        <!-- 数据库连接 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/drds_0"
+                        userId="root"
+                        password="root"/>
+        <!--  默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer
+           true，把JDBC DECIMAL 和 NUMERIC 类型解析为java.math.BigDecimal
+  -->
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+
+        <!-- 实体类生成路径 -->
+        <javaModelGenerator targetPackage="com.share.jdbc.entity" targetProject="src/main/java" />
+        <!-- ***mapper.xml 生成 -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources" />
+        <!-- ***mapper.java 生成 -->
+        <javaClientGenerator targetPackage="com.share.jdbc.mapper" targetProject="src/main/java" type="XMLMAPPER" />
+
+        <!-- 表结构的生成 -->
+        <!--<table tableName="broadcast" domainObjectName="Broadcast">-->
+            <!--<property name="useActualColumnNames" value="true"/>-->
+            <!--<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>-->
+        <!--</table>-->
+
+        <!--<table tableName="course00" domainObjectName="Course">-->
+            <!--<property name="useActualColumnNames" value="true"/>-->
+            <!--<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>-->
+        <!--</table>-->
+
+        <!--<table tableName="sclass00" domainObjectName="Sclass">-->
+            <!--<property name="useActualColumnNames" value="true"/>-->
+            <!--<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>-->
+        <!--</table>-->
+        <!--<table tableName="student00" domainObjectName="Student">-->
+            <!--<property name="useActualColumnNames" value="true"/>-->
+            <!--<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>-->
+        <!--</table>-->
+        <!--<table tableName="student_course00" domainObjectName="StudentCourse">-->
+            <!--<property name="useActualColumnNames" value="true"/>-->
+            <!--<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>-->
+        <!--</table>-->
+
+        <table tableName="sequence" domainObjectName="Sequence">
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
+        </table>
+
+    </context>
+</generatorConfiguration>

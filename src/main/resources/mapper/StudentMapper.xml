@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.jdbc.mapper.StudentMapper">
+  <resultMap id="BaseResultMap" type="com.share.jdbc.entity.Student">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="sId" jdbcType="BIGINT" property="sId" />
+    <result column="sName" jdbcType="VARCHAR" property="sName" />
+    <result column="gender" jdbcType="INTEGER" property="gender" />
+    <result column="classId" jdbcType="BIGINT" property="classId" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phoneNum" jdbcType="VARCHAR" property="phoneNum" />
+    <result column="bId" jdbcType="BIGINT" property="bId" />
+  </resultMap>
+</mapper>

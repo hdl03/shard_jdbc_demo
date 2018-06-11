@@ -1,0 +1,84 @@
+server:
+  port: 8080
+
+
+
+# mybatis 配置
+mybatis:
+  typeAliasesPackage: com.share.jdbc.entity
+  mapperLocations: classpath*:mapper/*.xml
+mapper:
+  mappers: com.share.jdbc.core.CommonMapper
+  not-empty: false
+  identity: mysql
+spring:
+  datasource:
+    name: drds_0,drds_1
+#    url: jdbc:mysql://localhost:3306/drds_0
+#    driver-class-name: com.mysql.jdbc.Driver
+#    username: root
+#    password: root
+logging:
+  level:
+    root: debug
+    java.sql: debug
+    tk.mybatis.mapper: debug
+    org.apache.ibatis: debug
+    tk.mybatis: TRACE
+sharding:
+  jdbc:
+    datasource:
+      names: drds_0,drds_1
+      drds_0:   # dataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/drds_0
+        username: root
+        password: root
+        type: com.alibaba.druid.pool.DruidDataSource
+      drds_1:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/drds_1
+        username: root
+        password: root
+        type: com.alibaba.druid.pool.DruidDataSource
+    config:
+      sharding:
+        default-data-source-name: drds_0   # 默认数据库
+        tables:
+          course:
+            DatabaseStrategy:
+              inline:
+                sharding-column: teacher   # 分库分表键
+                algorithm-expression:  drds_${(teacher.toString().hashCode()/4).longValue()%2}   # 分库表达式 第一个数字 4 ，代表第一个数据库有4个表，第二个 2代表有两个数据库
+            table-strategy:
+                inline:
+                  sharding-column: teacher
+                  algorithm-expression: course0${teacher.toString().hashCode()%8}  # 分表表达式 8 代表总共有多少个表
+            defaultKeyGeneratorClass: cId
+          sclass:
+            DatabaseStrategy:
+              inline:
+                sharding-column: classId
+                algorithm-expression:  drds_${(classId.longValue()/4).longValue()%2}
+            table-strategy:
+              inline:
+                sharding-column: classId
+                algorithm-expression: sclass0${classId.longValue()%8}
+          student:
+            DatabaseStrategy:
+              inline:
+                sharding-column: sId
+                algorithm-expression:  drds_${(sId.longValue()/4).longValue()%2}
+            table-strategy:
+              inline:
+                sharding-column: sId
+                algorithm-expression: student0${sId.longValue()%8}
+          student_course:
+            DatabaseStrategy:
+              inline:
+                sharding-column: scId
+                algorithm-expression:  drds_${(scId.longValue()/4).longValue()%2}
+            table-strategy:
+              inline:
+                sharding-column: scId
+                algorithm-expression: student_course0${scId.longValue()%8}
